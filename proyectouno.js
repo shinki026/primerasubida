@@ -1,3 +1,7 @@
+const express = require('express')
+const app = express()
+
+
 const fs = require('fs');
 
 let cursos = [{
@@ -74,18 +78,39 @@ let buscarCurso = (i,cursos) => {
 
 let v = buscarCurso(argv.i,cursos);
 
-let crearArchivo = (v) => {
+let crearHtml = (v) => {
 
 	if(v != undefined){
-		texto = 'El estudiante ' + argv.n + '\n' +
-				' con cedula ' + argv.c + '\n' +
-				' se ha matriculado en el curso ' + v.nombre + '\n' +
-				' tiene una duracion de ' + v.duracion + ' horas y un valor de ' + v.valor + ' mil pesos';
 
-		fs.writeFile('matricula.txt',texto,(err) =>{
-		if(err) throw (err);
-		console.log('se ha creado el archivo');
-	});
+		texto2 = "<h2>Información del estudiante</h2> " +      
+
+		         "<table> " +
+		         		  "<tr> <th> Nombre del estudiante </th> " +
+		         		  	   "<td> " + argv.n + " </td> " +
+		         		  "</tr>" +
+		         		  "<tr> <th> Cedula del estudiante </th> " +
+		         		  		"<td> " + argv.c + " </td> " +
+		         		  "</tr>" +
+
+		         "</table>" +
+
+		         "<h2>Información del curso</h2>" +
+
+		         "<table> " +
+		         		  "<tr> <th> Nombre del curso </th> " +
+		         		  	   "<td> " + v.nombre + " </td> " +
+		         		  "</tr>" +
+		         		  "<tr> <th> Duración del curso </th> " +
+		         		  		"<td> " + v.duracion + " horas </td> " +
+		         		  "</tr>" +
+		         		  "<tr> <th> Valor del curso </th> " +
+		         		  		"<td> " + v.valor + " mil pesos </td> " +
+		         		  "</tr>" +
+		         "</table>" +	
+
+		         "<h3> El estudiante " +argv.n+ " se ha inscrito en el curso de " + v.nombre + ". </h3>"
+
+		         ;
 	}
 	else {
 		if(argv.i != undefined){
@@ -98,4 +123,15 @@ let crearArchivo = (v) => {
 	}
 }
 
-crearArchivo(v);
+crearHtml(v);
+
+
+ 
+app.get('/', function (req, res) {
+  res.send(texto2)
+})
+ 
+app.listen(3000)
+
+
+
