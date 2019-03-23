@@ -78,11 +78,17 @@ let buscarCurso = (i,cursos) => {
 
 let v = buscarCurso(argv.i,cursos);
 
-let crearHtml = (v) => {
+let crearArchivo = (v) => {
 
 	if(v != undefined){
+		// texto = 'El estudiante ' + argv.n + '\n' +
+		// 		' con cedula ' + argv.c + '\n' +
+		// 		' se ha matriculado en el curso ' + v.nombre + '\n' +
+		// 		' tiene una duracion de ' + v.duracion + ' horas y un valor de ' + v.valor + ' mil pesos';
 
-		texto2 = "<h2>Información del estudiante</h2> " +      
+
+
+			texto2 = "<h2>Información del estudiante</h2> " +      
 
 		         "<table> " +
 		         		  "<tr> <th> Nombre del estudiante </th> " +
@@ -110,7 +116,13 @@ let crearHtml = (v) => {
 
 		         "<h3> El estudiante " +argv.n+ " se ha inscrito en el curso de " + v.nombre + ". </h3>"
 
-		         ;
+		         ;		
+
+		// fs.writeFile('matricula.txt',texto,(err) =>{
+		// if(err) throw (err);
+		// console.log('se ha creado el archivo');
+	// });
+		console.log("Ingrese a http://localhost:3000 ");
 	}
 	else {
 		if(argv.i != undefined){
@@ -123,7 +135,7 @@ let crearHtml = (v) => {
 	}
 }
 
-crearHtml(v);
+crearArchivo(v);
 
 
  
